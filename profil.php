@@ -17,6 +17,7 @@ try {
     echo $erreur;
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +37,23 @@ try {
 </head>
 
 <body>
+<?php
+            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+                echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';     //affichage message en cas de reussite
+                unset($_SESSION['success']);
+            }
+            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+                echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';     //affichage message en cas de reussite
+                unset($_SESSION['status']);
+            }
 
+            ?>
 
 <!-- Button trigger modal -->
-
+<div class="container emp-profile bg-danger text-white">
+    <h1>Client Premium Mbolé</h1>
+    <div class="warming"><h2>bienvenu   <button class="btn btn-warning"><h2><?= $row['nom_client'] ?></h2></button></h2></div>
+    </div>
 
     <div class="container emp-profile">
         <form method="post">
@@ -57,14 +71,17 @@ try {
                         <h6>
                             <?= $row['profession'] ?>
                         </h6>
-                        <p class="proile-rating">Points Bonus : <span>47</span></p>
+                        <p class="proile-rating"><h4>Points Bonus :  <?= $row['bonus'] ?></h4></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="graphique.php" role="tab" aria-controls="profile" aria-selected="false">Statistique</a>
+                            </li><li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="message_client.php" role="tab" aria-controls="profile" aria-selected="false">Message</a>
                             </li>
+
                         </ul>
                     </div>
                 </div>
