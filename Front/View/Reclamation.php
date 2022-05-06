@@ -36,6 +36,24 @@ function verifierOriginRE($id,$email)
 
 $reclamationPublique = getReclamationPublique();
 
+$decla = array('Prix','Retard','Mauvais retour','Autres');
+
+if( isset($_POST['decla']) && $_POST['secteur']!='default')
+        {
+ 
+            $control = new TypeC();
+            
+            $declaration = $_POST['decla'];
+            
+            $newType = new Type($declaration);
+            
+            $control->addReclamation($newType);
+ 
+        }
+//         && $_POST['secteur']!='default'
+
+// $clef = $_POST['decla'];
+// $valeur = $decla[$_POST['decla']];
 ?>
 
 
@@ -51,7 +69,7 @@ $reclamationPublique = getReclamationPublique();
     <meta name="description" content="">
     <meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>Contact us - Progressus Bootstrap template</title>
+    <title>Reclamation - Air Mbole</title>
 
     <link rel="shortcut icon" href="assets/images/gt_favicon.png">
 
@@ -108,7 +126,7 @@ $reclamationPublique = getReclamationPublique();
 
         <ol class="breadcrumb">
             <li><a href="index.html">Home</a></li>
-            <li class="active">Exprimez Vous</li>
+            <li class="active">Reclamations</li>
         </ol>
 
         <div class="row">
@@ -123,19 +141,36 @@ $reclamationPublique = getReclamationPublique();
 					We’d love to hear from you. Interested in working together? Fill out the form below with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.
 				</p> -->
                 <br>
-                <form action="../Controller/ajouterReclamation.php" method="post">
+                <form action="../Controller/ajouterReclamation.php" method="post" id="form_cnt">
                     <div class="row">
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-sm-12">
                             <textarea placeholder="Saisissez votre reclamation ici..." class="form-control" rows="9"
-                                name="contenu" id="contenu"></textarea>
+                                name="contenu" id="contenu" minlength="2" maxlength="300"></textarea>
+                            <span id="erre"></span>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-sm-6">
+                            <label for="decla"> Type: </label>
+                            <!-- <select name="decla" >
+                                <option value="Prix"> Prix </option>
+                                <option value="Retard"> Retard </option>
+                                <option value="mr"> Mauvais retour </option>
+                                <option value="Autres"> Autres </option>
+                            </select> -->
+
+                            <select name="decla">
+                                <?php
+                                    foreach($decla as $key => $decla):
+                                        echo'<option value="'.$key.'">'.$decla.'</option>';
+                                    endforeach;
+                                ?>
+                            </select>
+
                             <label class="checkbox"><input type="checkbox" name="prive"> Reclamation privée</label>
                         </div>
                         <div class="col-sm-6 text-right">
@@ -169,7 +204,7 @@ $reclamationPublique = getReclamationPublique();
         <div class="row">
 
             <section class="container-full top-space">
-                <h4>RECLAMATIONS</h4>
+                <h4>Vos Reclamations</h4>
                 <br>
                 <?php foreach($reclamationPublique as $reclamation){ ?>
                 <div class="widget">
@@ -178,7 +213,8 @@ $reclamationPublique = getReclamationPublique();
                         <li style="border-bottom: 1px #eee solid;">
                             <a><?php echo $reclamation['email_utilisateur']?></a>
                             <span class="small text-muted"><?php echo $reclamation['Date']?></span>
-                            <a style="color:black;" id="modifier"><i class="fa fa-pencil"
+                            <a style="color:black;" id="modifier"
+                                href="modifier.php?id=<?php echo $reclamation['Id_recla'] ?>"><i class="fa fa-pencil"
                                     style="margin-left:5rem;"></i></a> <a
                                 href="../Controller/supprimerReclamation.php?id=<?php echo $reclamation['Id_recla'] ?>"
                                 style="color:black;"><i class="fa fa-trash-o" style="margin-left:1rem;"></i></a>
@@ -250,11 +286,11 @@ $reclamationPublique = getReclamationPublique();
                     <div class="col-md-6 widget">
                         <div class="widget-body">
                             <p class="simplenav">
-                                <<a href="#">Home</a> | 
-								<a href="about.html">Vols</a> |
-								<!--<a href="sidebar-right.html">Sidebar</a> |-->
-								<a href="Reclamation.php">Reclamation</a> |
-								<b><a href="signup.html">Sign up</a></b>
+                                <<a href="#">Home</a> |
+                                    <a href="about.html">Vols</a> |
+                                    <!--<a href="sidebar-right.html">Sidebar</a> |-->
+                                    <a href="Reclamation.php">Reclamation</a> |
+                                    <b><a href="signup.html">Sign up</a></b>
                             </p>
                         </div>
                     </div>
@@ -294,6 +330,9 @@ $reclamationPublique = getReclamationPublique();
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script>
     <script src="assets/js/google-map.js"></script>
+
+    <!-- Controle de saisi reclamation -->
+    <script src="assets/js/ControlRecla.js"></script>
 
 
 </body>

@@ -52,13 +52,6 @@ class Reclamation{
 class  Recla_prive extends Reclamation{
 
    private string $em_admin;
-   
-   public function __construct(string $em_user,string $text,string $em_admin){
-    
-    parent::__construct($em_user,$text);
-    
-    $this->em_admin = $em_admin;
-}
 
    public function get_emailA() :string{
     return $this->em_admin;

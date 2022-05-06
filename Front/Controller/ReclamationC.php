@@ -7,7 +7,7 @@ class ReclamationC{
 
     function addReclamation($newReclamation){
         $db = config::getConnexion();
-
+        
         try {
             
             $query = $db->prepare(
@@ -33,6 +33,26 @@ class ReclamationC{
             );
             $query->execute([
                 'Id_recla' => $ReclamationId
+            ]);
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+
+    function UpdateReclamation($contenu,$id){
+        $db = config::getConnexion();
+        $dateActuel = date('y-m-d');
+        try {
+            
+            $query = $db->prepare(
+                'UPDATE reclamation_publique set date=:date,contenu=:contenu 
+                    where Id_recla=:Id_recla'
+            );
+            $query->execute([
+                'date' => $dateActuel,
+                'contenu' => $contenu,
+                'Id_recla' => $id
             ]);
         } catch (PDOException $e) {
             $e->getMessage();
