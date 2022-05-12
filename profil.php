@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '/xampp/htdocs/connexion.php'; // ajout connexion bdd 
+include '/xampp/htdocs/mbole/connexion.php'; // ajout connexion bdd 
 // si la session existe pas soit si l'on est pas connecté on redirige
 if (!isset($_SESSION['user'])) {
     header('Location:index.php');
@@ -33,26 +33,51 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
     <!------ Include the above in your HEAD tag ---------->
-    <title>Document</title>
+    <title>profil utilisateur</title>
 </head>
+<header>
+<div class="container mt-5" id="navprof">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.php">Accueil</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="vols.php">Vols</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reclamation.php">Reclamation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+</header>
 
 <body>
-<?php
-            if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-                echo '<h2 class="bg-primary text-white">' . $_SESSION['success'] . '</h2>';     //affichage message en cas de reussite
-                unset($_SESSION['success']);
-            }
-            if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-                echo '<h2 class="bg-danger text-white">' . $_SESSION['status'] . '</h2>';     //affichage message en cas de reussite
-                unset($_SESSION['status']);
-            }
 
-            ?>
+
+<div>
+        <?php
+        if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
+            echo '<h2 class="text-center top-space text-primary ">' . $_SESSION['success'] . '</h2>';     //affichage message en cas de reussite
+            unset($_SESSION['success']);
+        }
+        if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+            echo '<h2 class="text-center top-space text-danger ">' . $_SESSION['status'] . '</h2>';     //affichage message en cas de reussite
+            unset($_SESSION['status']);
+        }
+        ?>
 
 <!-- Button trigger modal -->
 <div class="container emp-profile bg-danger text-white">
-    <h1>Client Premium Mbolé</h1>
-    <div class="warming"><h2>bienvenu   <button class="btn btn-warning"><h2><?= $row['nom_client'] ?></h2></button></h2></div>
+    <br>
+    <h1> Espace Premium Mbolé</h1>
+    <div class="warming"><h2>Bienvenue   <button class="btn btn-warning"><h2><?= $row['nom_client'] ?> </h2></button></h2></div>
     </div>
 
     <div class="container emp-profile">
@@ -94,16 +119,16 @@ try {
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br />
-                            <a href="">Bootsnipp Profile</a><br />
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br />
-                            <a href="">Web Developer</a><br />
-                            <a href="">WordPress</a><br />
-                            <a href="">WooCommerce</a><br />
-                            <a href="">PHP, .Net</a><br />
+                            <p>INFOS UTILE</p>
+                            <a href=""></a><br />
+                            <a href=""></a><br />
+                            <a href=""></a>
+                            <p>COMPETENCES</p>
+                            <a href=""></a><br />
+                            <a href=""></a><br />
+                            <a href=""></a><br />
+                            <a href=""></a><br />
+                            <a href=""></a><br />
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -119,7 +144,7 @@ try {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Name</label>
+                                        <label>Nom</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p><?= $row['nom_client'] ?></p>
@@ -143,7 +168,7 @@ try {
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Cathegorie de clien</label>
+                                        <label>Cathegorie de client</label>
                                     </div>
                                     <div class="col-md-6">
                                         <p>Premium</p>
